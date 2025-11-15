@@ -34,6 +34,23 @@ export class AuthService {
     });
   }
 
+  // Примитивный логин по имени, телефону или e-mail
+  async login(identifier: string): Promise<{ authKey: string; user: User }> {
+    const user = await this.usersRepository.findOne({
+      where: [
+        { name: identifier },
+        { phone: identifier },
+        { email: identifier },
+      ],
+      relations: ['chats', 'chats.messages'],
+    });
+
+    if (!user) throw new NotFoundException('Пользователь не найден');
+
+    // возвращаем authKey для клиента
+    return { authKey: user.authKey, user };
+  }
+
   // Обновление имени
   async updateName(authKey: string, name: string): Promise<User> {
     const user = await this.findByAuthKey(authKey);

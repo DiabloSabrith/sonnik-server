@@ -24,6 +24,12 @@ export class AuthController {
     return this.authService.register(createUserDto);
   }
 
+  // Примитивный логин
+  @Post('login')
+  async login(@Body('identifier') identifier: string) {
+    return this.authService.login(identifier);
+  }
+
   // Получение пользователя по токену
   @Get('me')
   async getUserByToken(@Query('authKey') authKey: string): Promise<User | null> {
