@@ -4,11 +4,11 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Разрешаем локальный фронт + твой Vercel фронт
+  // Разрешаем локальный фронт + Vercel фронт
   app.enableCors({
     origin: [
       'http://localhost:3000',
-      'https://sonnik-alrtxwb92-diablosabriths-projects.vercel.app'
+      'https://sonnik-phi.vercel.app'
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Accept',
