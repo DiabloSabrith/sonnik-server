@@ -8,7 +8,8 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000',
-      'https://sonnik-phi.vercel.app'
+      'https://sonnik-phi.vercel.app',
+      'https://sonnik-pro-ai.vercel.app'
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Accept',
