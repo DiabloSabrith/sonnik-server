@@ -5,16 +5,12 @@ import { LlmService } from './llm.service';
 export class LlmController {
   constructor(private readonly llmService: LlmService) {}
 
+  // Отправка сообщения и получение ответа
   @Post('interpret')
-  async interpret(@Body() body: { text: string; chatId?: string }) {
-    console.log('Пришёл текст с клиента:', body.text);
-    
-    // Используем chatId из body или дефолтный "main"
-    const chatId = body.chatId || 'main';
-
-    // Вызываем метод с chatId и текстом
-    const response = await this.llmService.interpretDream(chatId, body.text);
-
-    return { response };
+  async interpret(
+    @Body() body: { text: string; chatId?: string; authKey: string },
+  ) {
+    const { text, chatId, authKey } = body;
+    return this.llmService.interpretDream(authKey, chatId || null, text);
   }
 }
